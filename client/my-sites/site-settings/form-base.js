@@ -1,7 +1,8 @@
 /**
  * External dependencies
  */
-var debug = require( 'debug' )( 'calypso:my-sites:site-settings' );
+var debug = require( 'debug' )( 'calypso:my-sites:site-settings' ),
+	omit = require( 'lodash/object/omit' );
 
 /**
  * Internal dependencies
@@ -43,7 +44,14 @@ module.exports = {
 		}
 
 		if ( nextProps.site.settings ) {
-			return this.setState( this.getSettingsFromSite( nextProps.site ) );
+			let newState = this.getSettingsFromSite( nextProps.site );
+			//for dirtyFields, see lib/mixins/dirty-linked-state
+			if ( this.state.dirtyFields ) {
+				//If we have any fields that the user has updated,
+				//do not wipe out those fields from the poll update.
+				newState = omit( newState, this.state.dirtyFields );
+			}
+			return this.setState( newState );
 		}
 
 		/**
@@ -131,7 +139,9 @@ module.exports = {
 
 		notices.clearNotices( 'notices' );
 
-		this.setState( { submittingForm: true } );
+		//for dirtyFields, see lib/mixins/dirty-linked-state
+		this.setState( { submittingForm: true, dirtyFields: [] } );
+
 		site.saveSettings( this.state, function( error ) {
 			if ( error ) {
 				// handle error case here
