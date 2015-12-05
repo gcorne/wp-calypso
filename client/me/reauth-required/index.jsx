@@ -158,6 +158,7 @@ module.exports = React.createClass( {
 			<Dialog
 				className="reauth-required__dialog"
 				isFullScreen={ false }
+				disableBackgroundScroll={ true }
 				isVisible={ this.props.twoStepAuthorization.isReauthRequired() }
 				buttons={ null }
 				onClose={ null }

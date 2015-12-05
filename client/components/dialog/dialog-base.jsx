@@ -5,7 +5,8 @@ var React = require( 'react' ),
 	clickOutside = require( 'click-outside' ),
 	closest = require( 'component-closest' ),
 	noop = require( 'lodash/utility/noop' ),
-	classnames = require( 'classnames' );
+	classnames = require( 'classnames' ),
+	classes = require( 'component-classes' );
 
 /**
  * Internal dependencies
@@ -24,7 +25,8 @@ var DialogBase = React.createClass( {
 			baseClassName: 'dialog',
 			isFullScreen: true,
 			autoFocus: true,
-			onClickOutside: noop
+			onClickOutside: noop,
+			disableBackgroundScroll: false
 		};
 	},
 
@@ -39,6 +41,9 @@ var DialogBase = React.createClass( {
 
 			this._unbindClickHandler = clickOutside( React.findDOMNode( this.refs.dialog ), this._onBackgroundClick );
 		}.bind( this ), 10 );
+		if ( this.props.disableBackgroundScroll ) {
+			classes( document.documentElement ).add( 'noscroll' );
+		}
 	},
 
 	componentWillUnmount: function() {
@@ -50,6 +55,10 @@ var DialogBase = React.createClass( {
 		if ( this._unbindClickHandler ) {
 			this._unbindClickHandler();
 			this._unbindClickHandler = null;
+		}
+
+		if ( this.props.disableBackgroundScroll ) {
+			classes( document.documentElement ).remove( 'noscroll' );
 		}
 	},
 

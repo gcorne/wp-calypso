@@ -31,6 +31,7 @@ mockery.enable( {
 } );
 
 mockery.registerMock( 'components/info-popover', MOCK_COMPONENT );
+mockery.registerMock( 'component-classes', {} );
 mockery.registerSubstitute( 'matches-selector', 'component-matches-selector' );
 mockery.registerSubstitute( 'query', 'component-query' );
 i18n.initialize();

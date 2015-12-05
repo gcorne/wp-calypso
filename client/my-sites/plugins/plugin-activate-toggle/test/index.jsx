@@ -29,6 +29,7 @@ describe( 'PluginActivateToggle', function() {
 		mockery.registerMock( 'analytics', analyticsMock );
 		mockery.registerMock( 'my-sites/plugins/plugin-action/plugin-action', mockedPluginAction );
 		mockery.registerMock( 'lib/plugins/actions', mockedActions );
+		mockery.registerMock( 'component-classes', {} );
 		mockery.registerSubstitute( 'matches-selector', 'component-matches-selector' );
 		mockery.registerSubstitute( 'query', 'component-query' );
 		mockery.enable( {

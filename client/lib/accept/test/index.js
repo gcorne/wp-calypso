@@ -23,6 +23,7 @@ describe( '#accept()', function() {
 		mockery.registerSubstitute( 'event', 'component-event' );
 		mockery.registerSubstitute( 'matches-selector', 'component-matches-selector' );
 		mockery.registerSubstitute( 'query', 'component-query' );
+		mockery.registerMock( 'component-classes', {} );
 		accept = require( '../' );
 		AcceptDialog = require( '../dialog' );
 		AcceptDialog.prototype.__reactAutoBindMap.translate = sinon.stub().returnsArg( 0 );

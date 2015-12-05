@@ -38,6 +38,7 @@ mockery.enable( {
 } );
 mockery.registerSubstitute( 'matches-selector', 'component-matches-selector' );
 mockery.registerSubstitute( 'query', 'component-query' );
+mockery.registerMock( 'component-classes', {} );
 mockery.registerMock( 'components/tinymce', MOCK_COMPONENT );
 mockery.registerMock( 'components/popover', MOCK_COMPONENT );
 mockery.registerMock( 'components/forms/clipboard-button', MOCK_COMPONENT );
